@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,35 @@ namespace Bacchus.Model
 
         public BacchusModel()
         {
-            Familles = new List<Famille>();
-            Marques = new List<Marque>();
-            SousFamilles = new List<SousFamille>();
-            Articles = new List<Article>();
+            Familles = GetFamilles();
+            Marques = GetMarques();
+            SousFamilles = GetSousFamilles();
+            Articles = GetArticles();
+
+        }
+
+        public List<Marque> GetMarques()
+        {
+            MarqueDAO MarqueDao = new MarqueDAO();
+            return MarqueDao.GetAllMarques();
+        }
+
+        public List<Famille> GetFamilles()
+        {
+            FamilleDAO FamilleDao = new FamilleDAO();
+            return FamilleDao.GetAllFamilles();
+        }
+
+        public List<SousFamille> GetSousFamilles()
+        {
+            SousFamilleDAO SousFamilleDao = new SousFamilleDAO();
+            return SousFamilleDao.GetAllSousFamilles();
+        }
+        public List<Article> GetArticles()
+        {
+            ArticleDAO ArticleDao = new ArticleDAO();
+            return ArticleDao.GetAllArticles();
+           
         }
         public Marque SearchMarque(string Nom_Marque)
         {

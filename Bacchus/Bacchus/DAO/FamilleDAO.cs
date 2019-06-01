@@ -12,6 +12,7 @@ namespace Bacchus.DAO
     class FamilleDAO
     {
         SQLiteConnection Connection;
+
         public FamilleDAO()
         {
             this.Connection = ConnectionDB.GetConnection();
@@ -37,6 +38,46 @@ namespace Bacchus.DAO
             }
             return Count;
 
+        }
+
+        public List<Famille> GetAllFamilles()
+        {
+            var Familles = new List<Famille>();
+
+            var Command = new SQLiteCommand("SELECT * FROM Familles", Connection);
+            var Reader = Command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                var RefFamille = Reader.GetInt32(0);
+                var Nom = Reader.GetString(1);
+                Familles.Add(new Famille(RefFamille, Nom));
+            }
+
+            Reader.Close();
+
+            return Familles;
+        }
+
+        public Famille GetFamilleByID(int Ref_Famille)
+        {
+            var RefFamille = 0;
+            var Nom = "";
+            var Command = new SQLiteCommand("SELECT * FROM Familles WHERE RefFamille = :RefFamille", Connection);
+            Command.Parameters.AddWithValue("RefFamille", Ref_Famille);
+            var Reader = Command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                RefFamille = Reader.GetInt32(0);
+                Nom = Reader.GetString(1);
+                //Familles.Add(new Famille(RefFamille, Nom));
+            }
+
+            Reader.Close();
+            var Famille = new Famille(RefFamille, Nom);
+
+            return Famille;
         }
     }
 }

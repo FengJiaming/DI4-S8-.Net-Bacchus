@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ListViewColumnSorter.cs" />
     <Compile Include="DAO\ArticleDAO.cs" />
     <Compile Include="DAO\FamilleDAO.cs" />
     <Compile Include="DAO\MarqueDAO.cs" />

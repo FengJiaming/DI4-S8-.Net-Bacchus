@@ -8,18 +8,23 @@ namespace Bacchus.Model
 {
     public class SousFamille
     {
-        public SousFamille(int Ref_SousFamille, int Ref_Famille, string Nom)
+        public SousFamille(int Ref_SousFamille,  Famille Famille, string Nom)
         {
             this.Ref_SousFamille = Ref_SousFamille;
-            this.Ref_Famille = Ref_Famille;
+            this.Famille = Famille;
             this.Nom = Nom;
         }
 
         public int Ref_SousFamille { get; set; }
 
-        public int Ref_Famille { get; set; }
+        public Famille Famille { get; set; }
 
         public string Nom { get; set; }
 
+        public string[] ToRow()
+        {
+            string[] Row = { Nom, Famille.Nom };
+            return Row;
+        }
     }
 }

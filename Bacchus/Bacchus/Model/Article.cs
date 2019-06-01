@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,21 @@ namespace Bacchus.Model
             this.Marque = Marque;
             this.PrixHT = PrixHT;
             this.Quantite = Quantite;
+        }
+
+        public override string ToString()
+        {
+            return Description + " - " + PrixHT + " - " + Quantite;
+        }
+
+        public string[] ToRow()
+        {
+            string[] Row =
+            {
+                Ref_Article, Description, Marque.Nom, SousFamille.Nom, PrixHT.ToString(CultureInfo.InvariantCulture),
+                Quantite.ToString()
+            };
+            return Row;
         }
     }
 }

@@ -40,5 +40,44 @@ namespace Bacchus.DAO
             return Count;
 
         }
+
+        public List<Marque> GetAllMarques()
+        {
+            var Marques = new List<Marque>();
+
+            var Command = new SQLiteCommand("SELECT * FROM Marques", Connection);
+            var Reader = Command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                var RefMarque = Reader.GetInt32(0);
+                var Nom = Reader.GetString(1);
+                Marques.Add(new Marque(RefMarque, Nom));
+            }
+
+            Reader.Close();
+
+            return Marques;
+        }
+
+        public Marque GetMarqueByID(int Ref_Marque)
+        {
+            var RefMarque = 0;
+            var Nom = "";
+            var Command = new SQLiteCommand("SELECT * FROM Marques WHERE RefMarque = :RefMarque", Connection);
+            Command.Parameters.AddWithValue("RefMarque", Ref_Marque);
+            var Reader = Command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                RefMarque = Reader.GetInt32(0);
+                Nom = Reader.GetString(1);
+            }
+
+            Reader.Close();
+            var Marque = new Marque(RefMarque, Nom);
+
+            return Marque;
+        }
     }
 }

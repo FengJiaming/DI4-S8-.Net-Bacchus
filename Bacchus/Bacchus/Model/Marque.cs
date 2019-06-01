@@ -17,5 +17,11 @@ namespace Bacchus.Model
         public int Ref_Marque { get; set; }
 
         public string Nom { get; set; }
+
+        public string[] ToRow()
+        {
+            string[] Row = { Nom };
+            return Row;
+        }
     }
 }

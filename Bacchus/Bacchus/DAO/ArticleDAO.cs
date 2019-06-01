@@ -6,14 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bacchus.Model;
+
 namespace Bacchus.DAO
 {
     class ArticleDAO
     {
         SQLiteConnection Connection;
+
+        SousFamilleDAO SousFamilleDao;
+
+        MarqueDAO MarqueDao;
+
         public ArticleDAO()
         {
             this.Connection = ConnectionDB.GetConnection();
+            this.SousFamilleDao = new SousFamilleDAO();
+            this.MarqueDao = new MarqueDAO();
         }
 
         /*public Article MakeArticle(String Ref, string Des, int RefSubF, int RefMark, float Price, int Quantity)
@@ -42,7 +50,7 @@ namespace Bacchus.DAO
             using (SQLiteTransaction Transaction = Connection.BeginTransaction())
             {
                 InsertCommand.CommandText = "INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT" +
-                    "Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT, :quantite)";
+                    ", Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT, :quantite)";
                 InsertCommand.Parameters.AddWithValue("RefArticle", Article.Ref_Article);
                 InsertCommand.Parameters.AddWithValue("Description", Article.Description);
                 InsertCommand.Parameters.AddWithValue("RefSousFamille", Article.SousFamille.Ref_SousFamille);
@@ -57,9 +65,32 @@ namespace Bacchus.DAO
             }
             return Count;
 
-
         }
-        
+
+
+        public List<Article> GetAllArticles()
+        {
+            var Articles = new List<Article>();
+
+            var Command = new SQLiteCommand("SELECT * FROM Articles", Connection);
+            var Reader = Command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                var RefArticle = Reader.GetString(0);
+                var Description = Reader.GetString(1);
+                var SousFamille = SousFamilleDao.GetSousFamilleByID(Reader.GetInt32(2));
+                var Marque = MarqueDao.GetMarqueByID(Reader.GetInt32(3));
+                var PrixHT = Reader.GetFloat(4);
+                var Quantite = Reader.GetInt32(5);
+
+                Articles.Add(new Article(RefArticle, Description, SousFamille, Marque, PrixHT, Quantite));
+            }
+
+            Reader.Close();
+
+            return Articles;
+        }
     }
 }
 

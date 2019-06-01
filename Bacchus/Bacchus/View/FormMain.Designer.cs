@@ -63,20 +63,21 @@
             // actualiserToolStripMenuItem
             // 
             this.actualiserToolStripMenuItem.Name = "actualiserToolStripMenuItem";
-            this.actualiserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.actualiserToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.actualiserToolStripMenuItem.Text = "Actualiser";
+            this.actualiserToolStripMenuItem.Click += new System.EventHandler(this.actualiserToolStripMenuItem_Click);
             // 
             // importerToolStripMenuItem
             // 
             this.importerToolStripMenuItem.Name = "importerToolStripMenuItem";
-            this.importerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importerToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.importerToolStripMenuItem.Text = "Importer";
             this.importerToolStripMenuItem.Click += new System.EventHandler(this.importerToolStripMenuItem_Click);
             // 
             // exporterToolStripMenuItem
             // 
             this.exporterToolStripMenuItem.Name = "exporterToolStripMenuItem";
-            this.exporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exporterToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.exporterToolStripMenuItem.Text = "Exporter";
             // 
             // statusStrip1
@@ -94,6 +95,7 @@
             this.TreeView.Name = "TreeView";
             this.TreeView.Size = new System.Drawing.Size(205, 404);
             this.TreeView.TabIndex = 2;
+            this.TreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
             // 
             // splitter1
             // 
@@ -111,6 +113,8 @@
             this.ListView.Size = new System.Drawing.Size(592, 404);
             this.ListView.TabIndex = 4;
             this.ListView.UseCompatibleStateImageBehavior = false;
+            this.ListView.View = System.Windows.Forms.View.Details;
+            this.ListView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ListView_KeyUp);
             // 
             // FormMain
             // 
