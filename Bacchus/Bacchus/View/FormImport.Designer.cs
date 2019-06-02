@@ -76,7 +76,7 @@
             // ToolStripProgressBar
             // 
             this.ToolStripProgressBar.Name = "ToolStripProgressBar";
-            this.ToolStripProgressBar.Size = new System.Drawing.Size(350, 16);
+            this.ToolStripProgressBar.Size = new System.Drawing.Size(400, 16);
             // 
             // ImportGroupBox
             // 
@@ -94,7 +94,7 @@
             this.tableLayoutPanelFile.ColumnCount = 3;
             this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.07692F));
             this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.92308F));
-            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanelFile.Controls.Add(this.SelectFileButton, 2, 0);
             this.tableLayoutPanelFile.Controls.Add(this.FileBox, 1, 0);
             this.tableLayoutPanelFile.Controls.Add(this.label1, 0, 0);
@@ -107,7 +107,8 @@
             // 
             // SelectFileButton
             // 
-            this.SelectFileButton.Location = new System.Drawing.Point(350, 3);
+            this.SelectFileButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SelectFileButton.Location = new System.Drawing.Point(352, 3);
             this.SelectFileButton.Name = "SelectFileButton";
             this.SelectFileButton.Size = new System.Drawing.Size(79, 22);
             this.SelectFileButton.TabIndex = 0;
@@ -124,8 +125,9 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(16, 1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 26);
             this.label1.TabIndex = 1;
@@ -147,7 +149,8 @@
             // 
             // ImportButtonAppend
             // 
-            this.ImportButtonAppend.Location = new System.Drawing.Point(3, 3);
+            this.ImportButtonAppend.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ImportButtonAppend.Location = new System.Drawing.Point(52, 4);
             this.ImportButtonAppend.Name = "ImportButtonAppend";
             this.ImportButtonAppend.Size = new System.Drawing.Size(108, 23);
             this.ImportButtonAppend.TabIndex = 0;
@@ -157,7 +160,8 @@
             // 
             // ImportButtonOverwrite
             // 
-            this.ImportButtonOverwrite.Location = new System.Drawing.Point(216, 3);
+            this.ImportButtonOverwrite.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ImportButtonOverwrite.Location = new System.Drawing.Point(260, 4);
             this.ImportButtonOverwrite.Name = "ImportButtonOverwrite";
             this.ImportButtonOverwrite.Size = new System.Drawing.Size(120, 23);
             this.ImportButtonOverwrite.TabIndex = 1;

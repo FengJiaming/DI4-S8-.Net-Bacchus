@@ -1,13 +1,7 @@
 ﻿using Bacchus.Controller;
 using Bacchus.Model;
+using Bacchus.View;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bacchus
@@ -19,19 +13,20 @@ namespace Bacchus
             InitializeComponent();
 
             BacchusModel = new BacchusModel();
-            
+            MainController = new MainController();
+
             TreeView.Nodes.Add("Articles", "Articles");
             TreeView.Nodes.Add("Marques", "Marques");
             TreeView.Nodes.Add("Familles", "Familles");
             TreeView.Nodes.Add("Sous-Familles", "Sous-Familles");
             
             TreeView.Sort();
-            //BacchusModel.SousFamilles = GetAllSousFamilles(BacchusModel);
-            //BacchusModel.Articles = GetAllArticles(BacchusModel);
 
         }
 
-        public BacchusModel BacchusModel { get; private set; }
+        public BacchusModel BacchusModel;
+
+        public MainController MainController;
 
         private ListViewColumnSorter ColumnSorter;
 
@@ -53,9 +48,7 @@ namespace Bacchus
 
             if (Node.Name.Equals("Articles"))
             {
-                /*
-                 * On crée la liste des articles
-                 */
+
                 ListView.Columns.Add("Référence", "Référence");
                 ListView.Columns.Add("Description", "Description");
                 ListView.Columns.Add("Marque", "Marque");
@@ -69,14 +62,12 @@ namespace Bacchus
                 }
 
                 ListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-                ListView.Text = @"Articles";
+                ListView.Text = "Articles";
             }
 
             else if (Node.Name.Equals("Marques"))
             {
-                /*
-                 * On crée la liste des marques
-                 */
+
                 ListView.Columns.Add("Nom", "Nom");
 
                 foreach (var Marque in BacchusModel.Marques)
@@ -85,14 +76,12 @@ namespace Bacchus
                 }
 
                 ListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-                ListView.Text = @"Marques";
+                ListView.Text = "Marques";
             }
 
             else if (Node.Name.Equals("Familles"))
             {
-                /*
-                 * On crée la liste des familles
-                 */
+
                 ListView.Columns.Add("Nom", "Nom");
 
                 foreach (var Famille in BacchusModel.Familles)
@@ -101,14 +90,12 @@ namespace Bacchus
                 }
 
                 ListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-                ListView.Text = @"Familles";
+                ListView.Text = "Familles";
             }
 
             else if (Node.Name.Equals("Sous-Familles"))
             {
-                /*
-                 * On crée la liste des sous familles
-                 */
+
                 ListView.Columns.Add("Nom", "Nom");
                 ListView.Columns.Add("Famille", "Famille");
 
@@ -118,7 +105,7 @@ namespace Bacchus
                 }
 
                 ListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-                ListView.Text = @"Sous-Familles";
+                ListView.Text = "Sous-Familles";
             }
 
             ListView.Sort();
@@ -144,12 +131,138 @@ namespace Bacchus
                 case Keys.F5:
                     UpdateListView();
                     break;
-                /*case Keys.Delete:
-                    DeleteElement();
+                case Keys.Delete:
+                    MainController.DeleteElement(ListView.SelectedItems[0].Text, ListView.Text, BacchusModel);
+                    UpdateListView();
                     break;
                 case Keys.Enter:
-                    ModifyAction(ListView.SelectedItems[0]);
-                    break;*/
+                    ModifyElement(ListView.SelectedItems[0]);
+                    break;
+            }
+        }
+
+        private void TreeView_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F5:
+                    UpdateListView();
+                    break;
+            }
+        }
+
+        private void ListView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right) return;
+
+            if (ListView.FocusedItem.Bounds.Contains(e.Location))
+                ContextMenuStrip.Show(Cursor.Position);
+
+        }
+
+        private void ajouterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ListView.Text.Equals("Articles"))
+            {
+                FormAddArticle FormAddArticle = new FormAddArticle
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this
+                };
+                //FormAddArticle.AddFormArticle_Load();
+                FormAddArticle.ShowDialog(this);
+            }
+            else if (ListView.Text.Equals("Marques"))
+            {
+                FormAddMarque FormAddMarque = new FormAddMarque
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this,
+                };
+                FormAddMarque.ShowDialog(this);
+            }
+            else if (ListView.Text.Equals("Familles"))
+            {
+                FormAddFamille FormAddFamille = new FormAddFamille
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this
+                };
+                FormAddFamille.ShowDialog(this);
+            }
+            else if (ListView.Text.Equals("Sous-Familles"))
+            {
+                FormAddSousFamille FormAddSousFamille = new FormAddSousFamille
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this
+                };
+                //FormAddSousFamille.AddFormSousFamille_Load();
+                FormAddSousFamille.ShowDialog(this);
+            }
+        }
+
+        private void modifierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModifyElement(ListView.SelectedItems[0]);
+        }
+
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainController.DeleteElement(ListView.SelectedItems[0].Text, ListView.Text, BacchusModel);
+            UpdateListView();
+        }
+
+        private void ModifyElement(ListViewItem Item)
+        {
+            if (ListView.Text.Equals("Articles"))
+            {
+                var Article = BacchusModel.SearchArticle(Item.Text);
+
+                FormModifyArticle FormModifyArticle = new FormModifyArticle
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this
+                };
+
+                //FormModifyArticle.FillField(Article);
+                FormModifyArticle.ShowDialog(this);
+            }
+            else if (ListView.Text.Equals("Marques"))
+            {
+                var Marque = BacchusModel.SearchMarque(Item.Text);
+
+                FormModifyMarque FormModifyMarque = new FormModifyMarque
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this,
+                };
+                //FormModifyMarque.InitializeMarque(Marque);
+                FormModifyMarque.ShowDialog(this);
+            }
+            else if (ListView.Text.Equals("Familles"))
+            {
+                var Famille = BacchusModel.SearchFamille(Item.Text);
+                FormModifyFamille FormModifyFamille = new FormModifyFamille
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this
+                };
+
+                //FormModifyFamille.FillField(Famille);
+                FormModifyFamille.ShowDialog(this);
+            }
+            else if (ListView.Text.Equals("Sous-Familles"))
+            {
+                var SousFamille = BacchusModel.SearchSousFamille(Item.Text);
+                FormModifySousFamille FormModifySousFamille = new FormModifySousFamille
+                {
+                    StartPosition = FormStartPosition.CenterParent,
+                    Owner = this
+                };
+
+                //FormModifySousFamille.FillField(SousFamille);
+                FormModifySousFamille.ShowDialog(this);
             }
         }
     }

@@ -13,16 +13,29 @@ namespace Bacchus.Utils
     {
         //public delegate void UpdateBar(int Progress);
         //public static event UpdateBar HasToUpdate;
-        public static int ReadFile(string FilePath, bool Flag, FormImport Form_Import, BacchusModel BacchusModel)
+        public static string ReadFile(string FilePath, bool Flag, FormImport Form_Import, BacchusModel BacchusModel)
         {
-            int nbImport = 0;
-            if (Flag = true)
+
+            if (Flag == true)
              {
-                 // On vide les données du modèle existant
-                 //BacchusModel.ClearAll();
-                 //Dao.ClearTables();
-             }
-            
+                BacchusModel.Articles.Clear();
+                BacchusModel.Marques.Clear();
+                BacchusModel.SousFamilles.Clear();
+                BacchusModel.Familles.Clear();
+
+                ArticleDAO ArticleDao = new ArticleDAO();
+                ArticleDao.DeleteAllArticles();
+                SousFamilleDAO SousFamilleDao = new SousFamilleDAO();
+                SousFamilleDao.DeleteAllSousFamilles();
+                MarqueDAO MarqueDao = new MarqueDAO();
+                MarqueDao.DeleteAllMarques();
+                FamilleDAO FamilleDao = new FamilleDAO();
+                FamilleDao.DeleteAllFamilles();
+            }
+
+            int AddedProducts = 0;
+            int ExistingProducts = 0;
+
             using (var StreamReader = new StreamReader(FilePath, Encoding.Default))
             {
                 var NbLines = File.ReadAllLines(FilePath).Length;
@@ -47,7 +60,12 @@ namespace Bacchus.Utils
 
                     if (BacchusModel.SearchArticle(Ref_Article) != null)
                     {
+                        ExistingProducts += 1;
                         continue;
+                    }
+                    else
+                    {
+                        AddedProducts += 1;
                     }
 
                     Marque Marque = BacchusModel.SearchMarque(Nom_Marque);
@@ -82,13 +100,15 @@ namespace Bacchus.Utils
                     BacchusModel.Articles.Add(Article);
                     ArticleDAO ArticleDao = new ArticleDAO();
                     ArticleDao.Insert(Article);
-                    nbImport += 1;
+                    
                     Form_Import.ToolStripProgressBar.Value++;
                 }
                 StreamReader.Close();
             }
-
-            return nbImport;
+            string Message = "Résultat: \n" +
+                             "Nombre d'articles ajoutés " + AddedProducts + "\n" +
+                             "Nombre d'articles anomalies " + ExistingProducts;
+            return Message;
         }
     }
 }

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ListViewColumnSorter.cs" />
+    <Compile Include="Controller\MainController.cs" />
     <Compile Include="DAO\ArticleDAO.cs" />
     <Compile Include="DAO\FamilleDAO.cs" />
     <Compile Include="DAO\MarqueDAO.cs" />
@@ -76,6 +77,30 @@
     <Compile Include="Model\SousFamille.cs" />
     <Compile Include="Utils\ConnectionDB.cs" />
     <Compile Include="Utils\Parser.cs" />
+    <Compile Include="View\FormAddArticle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormAddArticle.Designer.cs">
+      <DependentUpon>FormAddArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormAddFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormAddFamille.Designer.cs">
+      <DependentUpon>FormAddFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormAddMarque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormAddMarque.Designer.cs">
+      <DependentUpon>FormAddMarque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormAddSousFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormAddSousFamille.Designer.cs">
+      <DependentUpon>FormAddSousFamille.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +115,42 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\FormModifyArticle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormModifyArticle.Designer.cs">
+      <DependentUpon>FormModifyArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormModifyFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormModifyFamille.Designer.cs">
+      <DependentUpon>FormModifyFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormModifyMarque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormModifyMarque.Designer.cs">
+      <DependentUpon>FormModifyMarque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormModifySousFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormModifySousFamille.Designer.cs">
+      <DependentUpon>FormModifySousFamille.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\FormAddArticle.resx">
+      <DependentUpon>FormAddArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormAddFamille.resx">
+      <DependentUpon>FormAddFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormAddMarque.resx">
+      <DependentUpon>FormAddMarque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormAddSousFamille.resx">
+      <DependentUpon>FormAddSousFamille.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormImport.resx">
       <DependentUpon>FormImport.cs</DependentUpon>
     </EmbeddedResource>

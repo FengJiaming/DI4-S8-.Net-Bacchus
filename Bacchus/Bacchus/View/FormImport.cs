@@ -14,12 +14,10 @@ namespace Bacchus
 {
     public partial class FormImport : Form
     {
-        private int nbArticlesImport;
 
         public FormImport()
         {
             InitializeComponent();
-            this.nbArticlesImport = 0;
         }
 
         private void SelectFileButton_Click(object sender, EventArgs e)
@@ -36,34 +34,24 @@ namespace Bacchus
 
         private void ImportButtonAppend_Click(object sender, EventArgs e)
         {
-            //ToolStripProgressBar.Value = 0;
             ToolStripProgressBar.Visible = true;
             if (FileBox.Text == "")
             {
-                //l'operation quand aucune ficher selectionne
                 MessageBox.Show("Aucune Ficher Sélectionné."); 
                 return;
             }
+            else
+            {
+                string Message = Parser.ReadFile(FileBox.Text, false, this, ((FormMain)Owner).BacchusModel);
 
-            this.nbArticlesImport = Parser.ReadFile(FileBox.Text, false, this, ((FormMain)Owner).BacchusModel);
+                var Result = MessageBox.Show(Message , "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                if (Result != DialogResult.OK) return;
 
-            var Result = MessageBox.Show(nbArticlesImport + " Données importées", "Information", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+                ((FormMain)Owner).UpdateListView();
+                Close();
+            }
 
-            if (Result != DialogResult.OK) return;
-            
-
-            ((FormMain) Owner).UpdateListView();
-            Close();
-
-        }
-
-
-
-        private void UpdateProgress(int Progress)
-        {
-            ToolStripProgressBar.Value = Progress;
         }
 
         private void ImportButtonOverwrite_Click(object sender, EventArgs e)
@@ -71,20 +59,20 @@ namespace Bacchus
             ToolStripProgressBar.Visible = true;
             if (FileBox.Text == "")
             {
-                //l'operation quand aucune ficher selectionne
                 MessageBox.Show("Aucune Ficher Sélectionné.");
                 return;
             }
+            else
+            {
+                string Message = Parser.ReadFile(FileBox.Text, true, this, ((FormMain)Owner).BacchusModel);
 
-            this.nbArticlesImport = Parser.ReadFile(FileBox.Text, true, this, ((FormMain)Owner).BacchusModel);
+                var Result = MessageBox.Show(Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            var Result = MessageBox.Show(nbArticlesImport + "Données importées", "Information", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+                if (Result != DialogResult.OK) return;
 
-            if (Result != DialogResult.OK) return;
-
-            ((FormMain)Owner).UpdateListView();
-            Close();
+                ((FormMain)Owner).UpdateListView();
+                Close();
+            }
         }
     }
 }

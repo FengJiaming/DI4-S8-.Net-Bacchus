@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bacchus.DAO
 {
-    class FamilleDAO
+    public class FamilleDAO
     {
         SQLiteConnection Connection;
 
@@ -37,6 +37,14 @@ namespace Bacchus.DAO
                 InsertCommand.Dispose();
             }
             return Count;
+
+        }
+
+        public void Delete(Famille Famille)
+        {
+            var Command = new SQLiteCommand("DELETE FROM Familles WHERE RefFamille = :refFamille", Connection);
+            Command.Parameters.AddWithValue("refFamille", Famille.Ref_Famille);
+            Command.ExecuteNonQuery();
 
         }
 
@@ -78,6 +86,14 @@ namespace Bacchus.DAO
             var Famille = new Famille(RefFamille, Nom);
 
             return Famille;
+        }
+
+        public void DeleteAllFamilles()
+        {
+            var Transaction = Connection.BeginTransaction();
+            SQLiteCommand Command = new SQLiteCommand("DELETE FROM Familles", Connection);
+            Command.ExecuteNonQuery();
+            Transaction.Commit();
         }
     }
 }

@@ -9,7 +9,7 @@ using Bacchus.Model;
 
 namespace Bacchus.DAO
 {
-    class ArticleDAO
+    public class ArticleDAO
     {
         SQLiteConnection Connection;
 
@@ -67,6 +67,14 @@ namespace Bacchus.DAO
 
         }
 
+        public void Delete(Article Article)
+        {
+
+            var Command = new SQLiteCommand("DELETE FROM Articles WHERE RefArticle = :refArticle", Connection);
+            Command.Parameters.AddWithValue("refArticle", Article.Ref_Article);
+            Command.ExecuteNonQuery();
+
+        }
 
         public List<Article> GetAllArticles()
         {
@@ -90,6 +98,14 @@ namespace Bacchus.DAO
             Reader.Close();
 
             return Articles;
+        }
+
+        public void DeleteAllArticles()
+        {
+            var Transaction = Connection.BeginTransaction();
+            SQLiteCommand Command = new SQLiteCommand("DELETE FROM Articles", Connection);
+            Command.ExecuteNonQuery();
+            Transaction.Commit();
         }
     }
 }

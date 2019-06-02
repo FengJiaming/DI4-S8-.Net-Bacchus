@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Bacchus.DAO
 {
-    class MarqueDAO
+    public class MarqueDAO
     {
         SQLiteConnection Connection;
         public MarqueDAO()
@@ -41,6 +41,14 @@ namespace Bacchus.DAO
 
         }
 
+        public void Delete(Marque Marque)
+        {
+
+            var Command = new SQLiteCommand("DELETE FROM Marques WHERE RefMarque = :refMarque", Connection);
+            Command.Parameters.AddWithValue("refMarque", Marque.Ref_Marque);
+            Command.ExecuteNonQuery();
+
+        }
         public List<Marque> GetAllMarques()
         {
             var Marques = new List<Marque>();
@@ -78,6 +86,14 @@ namespace Bacchus.DAO
             var Marque = new Marque(RefMarque, Nom);
 
             return Marque;
+        }
+
+        public void DeleteAllMarques()
+        {
+            var Transaction = Connection.BeginTransaction();
+            SQLiteCommand Command = new SQLiteCommand("DELETE FROM Marques", Connection);
+            Command.ExecuteNonQuery();
+            Transaction.Commit();
         }
     }
 }
