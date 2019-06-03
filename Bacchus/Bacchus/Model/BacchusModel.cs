@@ -24,7 +24,7 @@ namespace Bacchus.Model
             Marques = GetMarques();
             SousFamilles = GetSousFamilles();
             Articles = GetArticles();
-
+            
         }
 
         public List<Marque> GetMarques()
@@ -90,9 +90,49 @@ namespace Bacchus.Model
                 if (Article.Ref_Article.Equals(Ref_Article))
                     return Article;
             }
-
             return null;
         }
+        /*
+        public String Out()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("Articles--------------------------------------------------------");
+
+            for (int i = 0; i < Articles.LongCount(); i++)
+            {
+                Console.WriteLine(Articles[i]);
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("Marques--------------------------------------------------------");
+
+            for (int i = 0; i < Marques.LongCount(); i++)
+            {
+                Console.WriteLine(Marques[i]);
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("Familles--------------------------------------------------------");
+
+            for (int i = 0; i < Familles.LongCount(); i++)
+            {
+                Console.WriteLine(Familles[i]);
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("SousFamilles--------------------------------------------------------");
+
+            for (int i = 0; i < SousFamilles.LongCount(); i++)
+            {
+                Console.WriteLine(SousFamilles[i]);
+            }
+
+            return null;
+        }*/
     }
 
 }
