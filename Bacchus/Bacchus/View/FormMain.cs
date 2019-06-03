@@ -37,6 +37,15 @@ namespace Bacchus
             FormImporter.ShowDialog(this);
         }
 
+        private void exporterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormExport FormExporter = new FormExport
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
+            FormExporter.ShowDialog(this);
+        }
+
         public void UpdateListView()
         {
             ListView.Clear();
