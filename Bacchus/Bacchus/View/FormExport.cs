@@ -20,9 +20,13 @@ namespace Bacchus.View
 
         private void SelectPathButton_Click(object sender, EventArgs e)
         {
+            string FileName = "Données à exporter.csv";
+
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
                 sfd.Filter = "csv files|*.csv";
+                sfd.FileName = FileName;
+
                 if (sfd.ShowDialog(this) == DialogResult.OK)
                 {
                     FileBox.Text = sfd.FileName;

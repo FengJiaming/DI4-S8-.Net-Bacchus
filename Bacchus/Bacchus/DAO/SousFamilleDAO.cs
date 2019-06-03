@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace Bacchus.DAO
 {
+    ///<summary>
+    ///Class: SousFamilleDAO
+    ///Type: DAO
+    ///Fonction: Traiter le Model SousFamille et réaliser les fonctions comme des ajouts, suppressions et modifications et recherches
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     public class SousFamilleDAO
     {
         SQLiteConnection Connection;
@@ -20,6 +27,13 @@ namespace Bacchus.DAO
             this.FamilleDao = new FamilleDAO();
         }
 
+        /// <summary>
+        /// Ajoute un sous-famille à la base de données
+        /// </summary>
+        /// <param name="SousFamille">Objet: SousFamille</param>
+        /// <returns>
+        /// int : Compte le nombre de sous-familles dans la base de donéee
+        /// </returns>
         public int Insert(SousFamille SousFamille)
         {
             int Count = 0;
@@ -43,6 +57,10 @@ namespace Bacchus.DAO
 
         }
 
+        /// <summary>
+        /// Mise a jour les sous-familles de la base de données
+        /// </summary>
+        /// <param name="SousFamille">Objet: SousFamille</param>
         public void Update(SousFamille SousFamille)
         {
             var Command = new SQLiteCommand("UPDATE SousFamilles SET Nom = :nom, RefFamille = :refFamille WHERE RefSousFamille = :refSousFamille",Connection);
@@ -52,6 +70,10 @@ namespace Bacchus.DAO
             Command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Supprimer un sous-famille à la base de données
+        /// </summary>
+        /// <param name="SousFamille">Objet: SousFamille</param>
         public void Delete(SousFamille SousFamille)
         {
 
@@ -61,6 +83,13 @@ namespace Bacchus.DAO
             Command.ExecuteNonQuery();
 
         }
+
+        /// <summary>
+        /// Obtenir tous les sous-familles de la base de données
+        /// </summary>
+        /// <returns>
+        /// List<SousFamille> : Liste de tous les sous-familles
+        /// </returns>
         public List<SousFamille> GetAllSousFamilles()
         {
             var SousFamilles = new List<SousFamille>();
@@ -82,6 +111,13 @@ namespace Bacchus.DAO
             return SousFamilles;
         }
 
+        /// <summary>
+        /// Obtenir la sous-famille correspondant à la ref en entrée
+        /// </summary>
+        /// <param name="Ref_SousFamille">int</param>
+        /// <returns>
+        /// SousFamille : Objet
+        /// </returns>
         public SousFamille GetSousFamilleByID(int Ref_SousFamille)
         {
             var RefSousFamille = 0;
@@ -105,6 +141,13 @@ namespace Bacchus.DAO
             return SousFamille;
         }
 
+        /// <summary>
+        /// Obtenir la sous-famille correspondant à la famille en entrée
+        /// </summary>
+        /// <param name="Famille">Famille</param>
+        /// <returns>
+        /// List<SousFamille> : Liste de tous les sous-familles
+        /// </returns>
         public List<SousFamille> GetSousFamillesByFamille(Famille Famille)
         {
             var SousFamilles = new List<SousFamille>();
@@ -125,6 +168,10 @@ namespace Bacchus.DAO
   
             return SousFamilles;
         }
+
+        /// <summary>
+        /// Supprimer tous les sous-familles de la base de données
+        /// </summary>
         public void DeleteAllSousFamilles()
         {
             var Transaction = Connection.BeginTransaction();

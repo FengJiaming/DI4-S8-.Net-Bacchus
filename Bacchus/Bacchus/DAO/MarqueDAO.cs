@@ -7,6 +7,13 @@ using System.Data.SQLite;
 
 namespace Bacchus.DAO
 {
+    ///<summary>
+    ///Class: MarqueDAO
+    ///Type: DAO
+    ///Fonction: Traiter le Model Marque et réaliser les fonctions comme des ajouts, suppressions et modifications et recherches
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     public class MarqueDAO
     {
         SQLiteConnection Connection;
@@ -16,6 +23,13 @@ namespace Bacchus.DAO
             
         }
 
+        /// <summary>
+        /// Ajoute un marque à la base de données
+        /// </summary>
+        /// <param name="Marque">Objet: Marque</param>
+        /// <returns>
+        /// int : Compte le nombre de marques dans la base de donéee
+        /// </returns>
         public int Insert(Marque Marque)
         {
             int Count = 0;
@@ -38,6 +52,10 @@ namespace Bacchus.DAO
 
         }
 
+        /// <summary>
+        /// Mise a jour les marques de la base de données
+        /// </summary>
+        /// <param name="Marque">Objet: Marque</param>
         public void Update(Marque Marque)
         {
             var Command = new SQLiteCommand("UPDATE Marques SET Nom = :nom WHERE RefMarque = :refMarque", Connection);
@@ -46,6 +64,10 @@ namespace Bacchus.DAO
             Command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Supprimer un marque à la base de données
+        /// </summary>
+        /// <param name="Marque">Objet: Marque</param>
         public void Delete(Marque Marque)
         {
 
@@ -54,6 +76,13 @@ namespace Bacchus.DAO
             Command.ExecuteNonQuery();
 
         }
+
+        /// <summary>
+        /// Obtenir tous les marques de la base de données
+        /// </summary>
+        /// <returns>
+        /// List<Marque> : Liste de tous les marques
+        /// </returns>
         public List<Marque> GetAllMarques()
         {
             var Marques = new List<Marque>();
@@ -73,6 +102,13 @@ namespace Bacchus.DAO
             return Marques;
         }
 
+        /// <summary>
+        /// Obtenir le marque correspondant à la ref en entrée
+        /// </summary>
+        /// <param name="Ref_Marque">int</param>
+        /// <returns>
+        /// Marque : Objet
+        /// </returns>
         public Marque GetMarqueByID(int Ref_Marque)
         {
             var RefMarque = 0;
@@ -93,6 +129,9 @@ namespace Bacchus.DAO
             return Marque;
         }
 
+        /// <summary>
+        /// Supprimer tous les marques de la base de données
+        /// </summary>
         public void DeleteAllMarques()
         {
             var Transaction = Connection.BeginTransaction();

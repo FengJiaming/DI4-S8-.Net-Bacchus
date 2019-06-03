@@ -5,15 +5,22 @@ using System.Data.SQLite;
 
 namespace Bacchus.Utils
 {
+    ///<summary>
+    ///Class: ConnectionDB
+    ///Type: Utils
+    ///Fonction: Utiliser System.Data.SQLite et Connecter la base de données
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     class ConnectionDB
     {
         private static SQLiteConnection Connection = null;
         private ConnectionDB() { }
 
         /// <summary>
-        /// get database connection
+        /// obtenir la connexion de base de données
         /// </summary>
-        /// <returns>Connection object</returns>
+        /// <returns>Objet de connexion</returns>
         public static SQLiteConnection GetConnection()
         {
             string Path = "Data Source=Bacchus.SQLite";

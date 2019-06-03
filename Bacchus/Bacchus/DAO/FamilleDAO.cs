@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace Bacchus.DAO
 {
+    ///<summary>
+    ///Class: FamilleDAO
+    ///Type: DAO
+    ///Fonction: Traiter le Model Famille et réaliser les fonctions comme des ajouts, suppressions et modifications et recherches
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     public class FamilleDAO
     {
         SQLiteConnection Connection;
@@ -18,6 +25,13 @@ namespace Bacchus.DAO
             this.Connection = ConnectionDB.GetConnection();
         }
 
+        /// <summary>
+        /// Ajoute un famille à la base de données
+        /// </summary>
+        /// <param name="Famille">Objet: Famille</param>
+        /// <returns>
+        /// int : Compte le nombre de familles dans la base de donéee
+        /// </returns>
         public int Insert(Famille Famille)
         {
             int Count = 0;
@@ -40,6 +54,10 @@ namespace Bacchus.DAO
 
         }
 
+        /// <summary>
+        /// Mise a jour les familles de la base de données
+        /// </summary>
+        /// <param name="Famille">Objet: Famille</param>
         public void Update(Famille Famille)
         {
             var Command = new SQLiteCommand("UPDATE Familles SET Nom = :nom WHERE RefFamille = :refFamille", Connection);
@@ -47,6 +65,11 @@ namespace Bacchus.DAO
             Command.Parameters.AddWithValue("refFamille", Famille.Ref_Famille);
             Command.ExecuteNonQuery();
         }
+
+        /// <summary>
+        /// Supprimer un famille à la base de données
+        /// </summary>
+        /// <param name="Famille">Objet: Famille</param>
         public void Delete(Famille Famille)
         {
             var Command = new SQLiteCommand("DELETE FROM Familles WHERE RefFamille = :refFamille", Connection);
@@ -55,6 +78,12 @@ namespace Bacchus.DAO
 
         }
 
+        /// <summary>
+        /// Obtenir tous les familles de la base de données
+        /// </summary>
+        /// <returns>
+        /// List<Famille> : Liste de tous les familles
+        /// </returns>
         public List<Famille> GetAllFamilles()
         {
             var Familles = new List<Famille>();
@@ -74,6 +103,13 @@ namespace Bacchus.DAO
             return Familles;
         }
 
+        /// <summary>
+        /// Obtenir la famille correspondant à la ref en entrée
+        /// </summary>
+        /// <param name="Ref_Famille">int</param>
+        /// <returns>
+        /// Famille : Objet
+        /// </returns>
         public Famille GetFamilleByID(int Ref_Famille)
         {
             var RefFamille = 0;
@@ -94,6 +130,9 @@ namespace Bacchus.DAO
             return Famille;
         }
 
+        /// <summary>
+        /// Supprimer tous les familles de la base de données
+        /// </summary>
         public void DeleteAllFamilles()
         {
             var Transaction = Connection.BeginTransaction();

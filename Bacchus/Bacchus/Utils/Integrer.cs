@@ -115,11 +115,57 @@ namespace Bacchus.Utils
         */
 
 
-
+        /*
         public static string ExportToCsv(string FilePath, FormExport Form_Export, BacchusModel BacchusModel)
         {
             string FileName = System.IO.Path.GetFileNameWithoutExtension(FilePath);
             string Path = System.IO.Path.GetDirectoryName(FilePath);
+
+            var NbLines = (int)BacchusModel.GetArticles().LongCount();
+
+            Form_Export.ToolStripProgressBar.Maximum = NbLines;
+            Form_Export.ToolStripProgressBar.Value = 0;
+
+            StreamWriter writer = null;
+
+            //StreamReader.ReadLine();
+
+            writer = new StreamWriter(FilePath);
+            StringBuilder sb = new StringBuilder();
+            string header = string.Empty;
+            //这里是要生成的表头
+            header = "Description" + ";" + "Ref" + ";" + "Marque" + ";" + "Famille" + ";" + "Sous-Famille" + ";" + "Prix H.T.";
+            sb.AppendLine(header.Trim(';')); //csv头
+            
+            List<Article> Articles = BacchusModel.GetArticles();
+            Articles[i]
+            for (int i = 0; i < NbLines; i++)
+            {                
+                for (int j = 0; j < 6; j++)
+                {
+                    
+                    
+
+                    Marque Marque = BacchusModel.SearchMarque(Nom_Marque);
+
+                    String ValueArticle = 
+                    var Description = Values[0].Trim();
+                    var Ref_Article = Values[1].Trim();
+                    var Nom_Marque = Values[2].Trim();
+                    var Nom_Famille = Values[3].Trim();
+                    var Nom_SousFamille = Values[4].Trim();
+                    var PrixHT = float.Parse(Values[5].Trim());
+                }
+
+            }
+
+    
+
+
+
+
+
+
 
             int AddedProducts = 0;
             int ExistingProducts = 0;
@@ -132,10 +178,9 @@ namespace Bacchus.Utils
                 Form_Export.ToolStripProgressBar.Maximum = NbLines;
                 Form_Export.ToolStripProgressBar.Value = 0;
 
-                StreamReader.ReadLine();
-
+                
                 string Line;
-                while ((Line = StreamReader.ReadLine()) != null)
+                while (writer.WriteLine()) == null)
                 {
 
                     var Values = Line.Split(';');
@@ -192,13 +237,23 @@ namespace Bacchus.Utils
 
                     Form_Export.ToolStripProgressBar.Value++;
                 }
-                StreamReader.Close();
+                StreamWriter.Close();
             }
+
             string Message = "Résultat: \n" +
                              "Nombre d'articles ajoutés " + AddedProducts + "\n" +
                              "Nombre d'articles anomalies " + ExistingProducts;
             return Message;
+            
         }
-        
+        */
+
+
+
+        public static string ExportToCsv(string FilePath, FormExport Form_Export, BacchusModel BacchusModel)
+        {
+
+            return null;
+        }
     }
 }

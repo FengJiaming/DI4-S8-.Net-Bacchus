@@ -7,8 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Bacchus.Model;
 
+
 namespace Bacchus.DAO
 {
+    ///<summary>
+    ///Class: ArticleDAO
+    ///Type: DAO
+    ///Fonction: Traiter le Model Article et réaliser les fonctions comme des ajouts, suppressions et modifications et recherches
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     public class ArticleDAO
     {
         SQLiteConnection Connection;
@@ -24,7 +32,13 @@ namespace Bacchus.DAO
             this.MarqueDao = new MarqueDAO();
         }
 
-
+        /// <summary>
+        /// Ajoute un article à la base de données
+        /// </summary>
+        /// <param name="Article">Objet: Article</param>
+        /// <returns>
+        /// int : Compte le nombre d'articles dans la base de donéee
+        /// </returns>
         public int Insert(Article Article)
         {
             int Count = 0;
@@ -49,6 +63,10 @@ namespace Bacchus.DAO
 
         }
 
+        /// <summary>
+        /// Mise a jour les articles de la base de données
+        /// </summary>
+        /// <param name="Article">Objet: Article</param>
         public void Update(Article Article)
         {
             var Command =new SQLiteCommand("UPDATE Articles SET Description = :descript, RefSousFamille = :refSousFamille, RefMarque = :refMarque, PrixHT = :prix, Quantite = :quantite WHERE RefArticle = :refArticle", Connection);
@@ -60,6 +78,11 @@ namespace Bacchus.DAO
             Command.Parameters.AddWithValue("refArticle", Article.Ref_Article);
             Command.ExecuteNonQuery();
         }
+
+        /// <summary>
+        /// Supprimer un article à la base de données
+        /// </summary>
+        /// <param name="Article">Objet: Article</param>
         public void Delete(Article Article)
         {
 
@@ -69,6 +92,12 @@ namespace Bacchus.DAO
 
         }
 
+        /// <summary>
+        /// Obtenir tous les articles de la base de données
+        /// </summary>
+        /// <returns>
+        /// List<Article> : Liste de tous les articles
+        /// </returns>
         public List<Article> GetAllArticles()
         {
             var Articles = new List<Article>();
@@ -93,6 +122,9 @@ namespace Bacchus.DAO
             return Articles;
         }
 
+        /// <summary>
+        /// Supprimer tous les articles de la base de données
+        /// </summary>
         public void DeleteAllArticles()
         {
             var Transaction = Connection.BeginTransaction();

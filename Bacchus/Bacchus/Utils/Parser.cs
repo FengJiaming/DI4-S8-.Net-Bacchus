@@ -9,9 +9,25 @@ using Bacchus.DAO;
 
 namespace Bacchus.Utils
 {
+    ///<summary>
+    ///Class: Parser
+    ///Type: Utils
+    ///Fonction: Solveur(Importer les données à cote de serveur)
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     public static class Parser
     {
-
+        /// <summary>
+        /// Lire le fichier.csv pour obtenir les données
+        /// </summary>
+        /// <param name="FilePath">string: Chemin d’accès au fichier importé</param>
+        /// <param name="Flag">bool: true->lancer l’intégration en mode écrasement; false->lancer l’intégration en mode ajout</param>
+        /// <param name="Form_Import">FormImport: View_FormImport_Objet</param>
+        /// <param name="BacchusModel">BacchusModel: Model_Tous_Objet</param>
+        /// <returns>
+        /// string : Résultats de l’importation de données
+        /// </returns>
         public static string ReadFile(string FilePath, bool Flag, FormImport Form_Import, BacchusModel BacchusModel)
         {
 
@@ -39,6 +55,7 @@ namespace Bacchus.Utils
             {
                 var NbLines = File.ReadAllLines(FilePath).Length;
 
+                //La barre de progression: l’intégration des données
                 Form_Import.ToolStripProgressBar.Maximum = NbLines;
                 Form_Import.ToolStripProgressBar.Value = 0;
 
@@ -67,6 +84,7 @@ namespace Bacchus.Utils
                         AddedProducts += 1;
                     }
 
+                    //Ajouter un élément à Marque
                     Marque Marque = BacchusModel.SearchMarque(Nom_Marque);
                     if (Marque == null)
                     {
@@ -77,6 +95,7 @@ namespace Bacchus.Utils
                         
                     }
 
+                    //Ajouter un élément à Famille 
                     Famille Famille = BacchusModel.SearchFamille(Nom_Famille);
                     if (Famille == null)
                     {
@@ -86,6 +105,7 @@ namespace Bacchus.Utils
                         int countfamille = FamilleDao.Insert(Famille);
                     }
 
+                    //Ajouter un élément à SousFamille
                     SousFamille SousFamille = BacchusModel.SearchSousFamille(Nom_SousFamille);
                     if (SousFamille == null)
                     {
@@ -95,6 +115,7 @@ namespace Bacchus.Utils
                         SousFamilleDao.Insert(SousFamille);
                     }
 
+                    //Ajouter un élément à Article
                     Article Article = new Article(Ref_Article, Description, SousFamille, Marque, PrixHT, 1);
                     BacchusModel.Articles.Add(Article);
                     ArticleDAO ArticleDao = new ArticleDAO();
@@ -104,6 +125,8 @@ namespace Bacchus.Utils
                 }
                 StreamReader.Close();
             }
+
+            //Le résultat de l’intégration, nombre d’articles ajoutés, anomalies
             string Message = "Résultat: \n" +
                              "Nombre d'articles ajoutés " + AddedProducts + "\n" +
                              "Nombre d'articles anomalies " + ExistingProducts;
