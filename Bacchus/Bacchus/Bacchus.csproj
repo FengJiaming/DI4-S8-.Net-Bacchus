@@ -72,6 +72,7 @@
     <Compile Include="DAO\SousFamilleDAO.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\BacchusModel.cs" />
+    <Compile Include="Model\CSV.cs" />
     <Compile Include="Model\Famille.cs" />
     <Compile Include="Model\Marque.cs" />
     <Compile Include="Model\SousFamille.cs" />

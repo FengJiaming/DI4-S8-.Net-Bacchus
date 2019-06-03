@@ -95,6 +95,15 @@ namespace Bacchus.DAO
                 Articles.Add(new Article(RefArticle, Description, SousFamille, Marque, PrixHT, Quantite));
             }
 
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("Articles--------------------------------------------------------");
+
+            for (int i = 0; i < Articles.LongCount(); i++)
+            {
+                Console.WriteLine(Articles[i]);
+            }
+
             Reader.Close();
 
             return Articles;

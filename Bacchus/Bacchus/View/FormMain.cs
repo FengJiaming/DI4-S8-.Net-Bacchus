@@ -21,6 +21,7 @@ namespace Bacchus
             TreeView.Nodes.Add("Sous-Familles", "Sous-Familles");
             
             TreeView.Sort();
+            //BacchusModel.Out();
 
         }
 
