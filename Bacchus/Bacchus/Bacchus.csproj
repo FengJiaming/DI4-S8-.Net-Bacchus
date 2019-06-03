@@ -76,7 +76,7 @@
     <Compile Include="Model\Marque.cs" />
     <Compile Include="Model\SousFamille.cs" />
     <Compile Include="Utils\ConnectionDB.cs" />
-    <Compile Include="Utils\Export.cs" />
+    <Compile Include="Utils\Integrer.cs" />
     <Compile Include="Utils\Parser.cs" />
     <Compile Include="View\FormAddArticle.cs">
       <SubType>Form</SubType>

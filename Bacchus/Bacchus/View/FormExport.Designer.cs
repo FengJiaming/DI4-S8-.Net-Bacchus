@@ -34,7 +34,7 @@
             this.ToolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.ExportGroupBox = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanelFile = new System.Windows.Forms.TableLayoutPanel();
-            this.SelectFileButton = new System.Windows.Forms.Button();
+            this.SelectPathButton = new System.Windows.Forms.Button();
             this.FileBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
@@ -96,10 +96,10 @@
             // tableLayoutPanelFile
             // 
             this.tableLayoutPanelFile.ColumnCount = 3;
-            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.62823F));
-            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.37177F));
-            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanelFile.Controls.Add(this.SelectFileButton, 2, 0);
+            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.64877F));
+            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.35123F));
+            this.tableLayoutPanelFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
+            this.tableLayoutPanelFile.Controls.Add(this.SelectPathButton, 2, 0);
             this.tableLayoutPanelFile.Controls.Add(this.FileBox, 1, 0);
             this.tableLayoutPanelFile.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanelFile.Location = new System.Drawing.Point(12, 47);
@@ -110,35 +110,36 @@
             this.tableLayoutPanelFile.Size = new System.Drawing.Size(584, 38);
             this.tableLayoutPanelFile.TabIndex = 1;
             // 
-            // SelectFileButton
+            // SelectPathButton
             // 
-            this.SelectFileButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SelectFileButton.Location = new System.Drawing.Point(507, 4);
-            this.SelectFileButton.Margin = new System.Windows.Forms.Padding(4);
-            this.SelectFileButton.Name = "SelectFileButton";
-            this.SelectFileButton.Size = new System.Drawing.Size(73, 30);
-            this.SelectFileButton.TabIndex = 0;
-            this.SelectFileButton.Text = "...";
-            this.SelectFileButton.UseVisualStyleBackColor = true;
+            this.SelectPathButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SelectPathButton.Location = new System.Drawing.Point(464, 4);
+            this.SelectPathButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SelectPathButton.Name = "SelectPathButton";
+            this.SelectPathButton.Size = new System.Drawing.Size(103, 30);
+            this.SelectPathButton.TabIndex = 0;
+            this.SelectPathButton.Text = " Sélectionner";
+            this.SelectPathButton.UseVisualStyleBackColor = true;
+            this.SelectPathButton.Click += new System.EventHandler(this.SelectPathButton_Click);
             // 
             // FileBox
             // 
-            this.FileBox.Location = new System.Drawing.Point(148, 4);
+            this.FileBox.Location = new System.Drawing.Point(141, 4);
             this.FileBox.Margin = new System.Windows.Forms.Padding(4);
             this.FileBox.Name = "FileBox";
-            this.FileBox.Size = new System.Drawing.Size(351, 26);
+            this.FileBox.Size = new System.Drawing.Size(302, 26);
             this.FileBox.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 10);
+            this.label1.Location = new System.Drawing.Point(7, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 18);
+            this.label1.Size = new System.Drawing.Size(123, 18);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Nom du fichier (.csv)";
+            this.label1.Text = "Chemin enregistré";
             // 
             // tableLayoutPanelButtons
             // 
@@ -164,6 +165,7 @@
             this.ExportButtonAppend.TabIndex = 0;
             this.ExportButtonAppend.Text = "Exporter";
             this.ExportButtonAppend.UseVisualStyleBackColor = true;
+            this.ExportButtonAppend.Click += new System.EventHandler(this.ExportButtonAppend_Click);
             // 
             // FormExport
             // 
@@ -195,7 +197,7 @@
         internal System.Windows.Forms.ToolStripProgressBar ToolStripProgressBar;
         private System.Windows.Forms.GroupBox ExportGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFile;
-        private System.Windows.Forms.Button SelectFileButton;
+        private System.Windows.Forms.Button SelectPathButton;
         private System.Windows.Forms.TextBox FileBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButtons;
