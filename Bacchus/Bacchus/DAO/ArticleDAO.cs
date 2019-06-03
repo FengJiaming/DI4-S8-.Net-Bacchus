@@ -24,24 +24,6 @@ namespace Bacchus.DAO
             this.MarqueDao = new MarqueDAO();
         }
 
-        /*public Article MakeArticle(String Ref, string Des, int RefSubF, int RefMark, float Price, int Quantity)
-        {
-            Article Article = new Article();
-            Article.Ref_Article = Ref;
-            Article.Description = Des;
-            Article.PrixHT = Price;
-            Article.Quantite = Quantity;
-
-            // insert mark
-            MarqueDAO MarqueDAO = new MarqueDAO();
-            Article.Ref_Marque = RefMark;
-
-            //insert subfamilly
-            SousFamilleDAO SousFamilleDAO = new SousFamilleDAO();
-            Article.Ref_SousFamille = RefSubF;
-
-            return Article;
-        }*/
 
         public int Insert(Article Article)
         {
@@ -67,6 +49,17 @@ namespace Bacchus.DAO
 
         }
 
+        public void Update(Article Article)
+        {
+            var Command =new SQLiteCommand("UPDATE Articles SET Description = :descript, RefSousFamille = :refSousFamille, RefMarque = :refMarque, PrixHT = :prix, Quantite = :quantite WHERE RefArticle = :refArticle", Connection);
+            Command.Parameters.AddWithValue("descript", Article.Description);
+            Command.Parameters.AddWithValue("refSousFamille", Article.SousFamille.Ref_SousFamille);
+            Command.Parameters.AddWithValue("refMarque", Article.Marque.Ref_Marque);
+            Command.Parameters.AddWithValue("prix", Article.PrixHT);
+            Command.Parameters.AddWithValue("quantite", Article.Quantite);
+            Command.Parameters.AddWithValue("refArticle", Article.Ref_Article);
+            Command.ExecuteNonQuery();
+        }
         public void Delete(Article Article)
         {
 

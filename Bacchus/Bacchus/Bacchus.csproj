@@ -64,7 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ListViewColumnSorter.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="DAO\ArticleDAO.cs" />
     <Compile Include="DAO\FamilleDAO.cs" />
@@ -166,6 +165,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\FormModifyArticle.resx">
+      <DependentUpon>FormModifyArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormModifyFamille.resx">
+      <DependentUpon>FormModifyFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormModifyMarque.resx">
+      <DependentUpon>FormModifyMarque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormModifySousFamille.resx">
+      <DependentUpon>FormModifySousFamille.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Bacchus.SQLite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

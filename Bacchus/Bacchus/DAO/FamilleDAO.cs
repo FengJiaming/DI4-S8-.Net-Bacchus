@@ -40,6 +40,13 @@ namespace Bacchus.DAO
 
         }
 
+        public void Update(Famille Famille)
+        {
+            var Command = new SQLiteCommand("UPDATE Familles SET Nom = :nom WHERE RefFamille = :refFamille", Connection);
+            Command.Parameters.AddWithValue("nom", Famille.Nom);
+            Command.Parameters.AddWithValue("refFamille", Famille.Ref_Famille);
+            Command.ExecuteNonQuery();
+        }
         public void Delete(Famille Famille)
         {
             var Command = new SQLiteCommand("DELETE FROM Familles WHERE RefFamille = :refFamille", Connection);
@@ -79,7 +86,6 @@ namespace Bacchus.DAO
             {
                 RefFamille = Reader.GetInt32(0);
                 Nom = Reader.GetString(1);
-                //Familles.Add(new Famille(RefFamille, Nom));
             }
 
             Reader.Close();

@@ -2,11 +2,8 @@
 using Bacchus.Utils;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Bacchus.DAO
 {
@@ -39,6 +36,14 @@ namespace Bacchus.DAO
             }
             return Count;
 
+        }
+
+        public void Update(Marque Marque)
+        {
+            var Command = new SQLiteCommand("UPDATE Marques SET Nom = :nom WHERE RefMarque = :refMarque", Connection);
+            Command.Parameters.AddWithValue("nom", Marque.Nom);
+            Command.Parameters.AddWithValue("refMarque", Marque.Ref_Marque);
+            Command.ExecuteNonQuery();
         }
 
         public void Delete(Marque Marque)

@@ -2,9 +2,6 @@
 using Bacchus.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bacchus.Controller
@@ -25,10 +22,51 @@ namespace Bacchus.Controller
             SousFamilleDao = new SousFamilleDAO();
         }
 
+        public List<SousFamille> GetSousFamillesByFamille(Famille Famille)
+        {
+            return SousFamilleDao.GetSousFamillesByFamille(Famille);
+        }
+
+        public void InsertElement(Article Article)
+        {
+            ArticleDao.Insert(Article);
+        }
+        public void InsertElement(Famille Famille)
+        {
+            FamilleDao.Insert(Famille);
+        }
+
+        public void InsertElement(SousFamille SousFamille)
+        {
+            SousFamilleDao.Insert(SousFamille);
+        }
+
+        public void InsertElement(Marque Marque)
+        {
+            MarqueDao.Insert(Marque);
+        }
+
+        public void UpdateElement(Article Article)
+        {
+            ArticleDao.Update(Article);
+        }
+        public void UpdateElement(Famille Famille)
+        {
+            FamilleDao.Update(Famille);
+        }
+
+        public void UpdateElement(SousFamille SousFamille)
+        {
+            SousFamilleDao.Update(SousFamille);
+        }
+
+        public void UpdateElement(Marque Marque)
+        {
+            MarqueDao.Update(Marque);
+        }
 
         public void DeleteElement(String ListItem, String ListView, BacchusModel BacchusModel)
         {
-            
 
             if (ListView.Equals("Articles"))
             {
@@ -94,11 +132,6 @@ namespace Bacchus.Controller
                 }
 
             }
-        }
-
-        public void ModifyElement()
-        {
-
         }
 
     }

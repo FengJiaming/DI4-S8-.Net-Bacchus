@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Bacchus.Utils
 {
@@ -20,7 +17,7 @@ namespace Bacchus.Utils
         public static SQLiteConnection GetConnection()
         {
             string Path = "Data Source=Bacchus.SQLite";
-            //new SQLiteConnection("Data Source=Bacchus.SQLite");
+
             if (Connection == null)
             {
                 Connection = new SQLiteConnection(Path);

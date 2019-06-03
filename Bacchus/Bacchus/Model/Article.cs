@@ -11,12 +11,10 @@ namespace Bacchus.Model
     {
         public string Ref_Article { get; set; }
         public string Description { get; set; }
-        //public int Ref_SousFamille { get; set; }
+
         public SousFamille SousFamille { get; set; }
 
         public Marque Marque { get; set; }
-
-        //public int Ref_Marque { get; set; }
         public int Quantite { get; set; }
         public float PrixHT { get; set; }
 

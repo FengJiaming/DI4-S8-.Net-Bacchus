@@ -43,6 +43,15 @@ namespace Bacchus.DAO
 
         }
 
+        public void Update(SousFamille SousFamille)
+        {
+            var Command = new SQLiteCommand("UPDATE SousFamilles SET Nom = :nom, RefFamille = :refFamille WHERE RefSousFamille = :refSousFamille",Connection);
+            Command.Parameters.AddWithValue("nom", SousFamille.Nom);
+            Command.Parameters.AddWithValue("refFamille", SousFamille.Famille.Ref_Famille);
+            Command.Parameters.AddWithValue("refSousFamille", SousFamille.Ref_SousFamille);
+            Command.ExecuteNonQuery();
+        }
+
         public void Delete(SousFamille SousFamille)
         {
 
@@ -62,7 +71,6 @@ namespace Bacchus.DAO
             while (Reader.Read())
             {
                 var RefSousFamille = Reader.GetInt32(0);
-                //var Famille = BacchusModel.GetFamille(Reader.GetInt32(1));
                 var Famille = FamilleDao.GetFamilleByID(Reader.GetInt32(1));
                 var Nom = Reader.GetString(2);
 
@@ -88,7 +96,6 @@ namespace Bacchus.DAO
                 RefSousFamille = Reader.GetInt32(0);
                 RefFamille = Reader.GetInt32(1);
                 Nom = Reader.GetString(2);
-                //Familles.Add(new Famille(RefFamille, Nom));
             }
 
             Reader.Close();
@@ -98,6 +105,26 @@ namespace Bacchus.DAO
             return SousFamille;
         }
 
+        public List<SousFamille> GetSousFamillesByFamille(Famille Famille)
+        {
+            var SousFamilles = new List<SousFamille>();
+
+            var Command = new SQLiteCommand("SELECT * FROM SousFamilles WHERE RefFamille = :refFamille", Connection);
+            Command.Parameters.AddWithValue("refFamille", Famille.Ref_Famille);
+            var Reader = Command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                var RefSousFamille = Reader.GetInt32(0);
+                var Nom = Reader.GetString(2);
+
+                SousFamilles.Add(new SousFamille(RefSousFamille, Famille, Nom));
+            }
+
+            Reader.Close();
+  
+            return SousFamilles;
+        }
         public void DeleteAllSousFamilles()
         {
             var Transaction = Connection.BeginTransaction();

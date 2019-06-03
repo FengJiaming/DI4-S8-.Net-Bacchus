@@ -11,8 +11,7 @@ namespace Bacchus.Utils
 {
     public static class Parser
     {
-        //public delegate void UpdateBar(int Progress);
-        //public static event UpdateBar HasToUpdate;
+
         public static string ReadFile(string FilePath, bool Flag, FormImport Form_Import, BacchusModel BacchusModel)
         {
 

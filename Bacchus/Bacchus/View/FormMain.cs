@@ -21,14 +21,12 @@ namespace Bacchus
             TreeView.Nodes.Add("Sous-Familles", "Sous-Familles");
             
             TreeView.Sort();
-
+            toolStripStatusLabel1.Text = "Il y a " + BacchusModel.Articles.Count + " articles ";
         }
 
         public BacchusModel BacchusModel;
 
         public MainController MainController;
-
-        private ListViewColumnSorter ColumnSorter;
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -110,12 +108,12 @@ namespace Bacchus
 
             ListView.Sort();
             ListView.Show();
+
+            toolStripStatusLabel1.Text = "Il y a " + BacchusModel.Articles.Count + " articles ";
         }
 
         private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            ColumnSorter = new ListViewColumnSorter();
-            ListView.ListViewItemSorter = ColumnSorter;
             UpdateListView();
         }
 
@@ -169,7 +167,6 @@ namespace Bacchus
                     StartPosition = FormStartPosition.CenterParent,
                     Owner = this
                 };
-                //FormAddArticle.AddFormArticle_Load();
                 FormAddArticle.ShowDialog(this);
             }
             else if (ListView.Text.Equals("Marques"))
@@ -197,7 +194,6 @@ namespace Bacchus
                     StartPosition = FormStartPosition.CenterParent,
                     Owner = this
                 };
-                //FormAddSousFamille.AddFormSousFamille_Load();
                 FormAddSousFamille.ShowDialog(this);
             }
         }
@@ -213,43 +209,42 @@ namespace Bacchus
             UpdateListView();
         }
 
-        private void ModifyElement(ListViewItem Item)
+        public void ModifyElement(ListViewItem Item)
         {
+
             if (ListView.Text.Equals("Articles"))
             {
-                var Article = BacchusModel.SearchArticle(Item.Text);
 
                 FormModifyArticle FormModifyArticle = new FormModifyArticle
                 {
                     StartPosition = FormStartPosition.CenterParent,
-                    Owner = this
-                };
+                    Owner = this,
 
-                //FormModifyArticle.FillField(Article);
+                };
+                FormModifyArticle.FillField(BacchusModel.SearchArticle(Item.Text));
                 FormModifyArticle.ShowDialog(this);
             }
             else if (ListView.Text.Equals("Marques"))
             {
-                var Marque = BacchusModel.SearchMarque(Item.Text);
 
                 FormModifyMarque FormModifyMarque = new FormModifyMarque
                 {
                     StartPosition = FormStartPosition.CenterParent,
-                    Owner = this,
+                    Owner = this
                 };
-                //FormModifyMarque.InitializeMarque(Marque);
+                FormModifyMarque.FillField(BacchusModel.SearchMarque(Item.Text));
                 FormModifyMarque.ShowDialog(this);
             }
             else if (ListView.Text.Equals("Familles"))
             {
-                var Famille = BacchusModel.SearchFamille(Item.Text);
+
                 FormModifyFamille FormModifyFamille = new FormModifyFamille
                 {
                     StartPosition = FormStartPosition.CenterParent,
-                    Owner = this
+                    Owner = this,
                 };
 
-                //FormModifyFamille.FillField(Famille);
+                FormModifyFamille.FillField(BacchusModel.SearchFamille(Item.Text));
                 FormModifyFamille.ShowDialog(this);
             }
             else if (ListView.Text.Equals("Sous-Familles"))
@@ -261,9 +256,14 @@ namespace Bacchus
                     Owner = this
                 };
 
-                //FormModifySousFamille.FillField(SousFamille);
+                FormModifySousFamille.FillField(BacchusModel.SearchSousFamille(Item.Text));
                 FormModifySousFamille.ShowDialog(this);
             }
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ModifyElement(ListView.SelectedItems[0]);
         }
     }
 }
