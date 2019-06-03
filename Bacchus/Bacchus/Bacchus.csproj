@@ -101,6 +101,12 @@
     <Compile Include="View\FormAddSousFamille.Designer.cs">
       <DependentUpon>FormAddSousFamille.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormExport.Designer.cs">
+      <DependentUpon>FormExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     <EmbeddedResource Include="View\FormAddSousFamille.resx">
       <DependentUpon>FormAddSousFamille.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FormExport.resx">
+      <DependentUpon>FormExport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormImport.resx">
       <DependentUpon>FormImport.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +175,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\FormModifyArticle.resx">
+      <DependentUpon>FormModifyArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormModifyFamille.resx">
+      <DependentUpon>FormModifyFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormModifyMarque.resx">
+      <DependentUpon>FormModifyMarque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormModifySousFamille.resx">
+      <DependentUpon>FormModifySousFamille.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Bacchus.SQLite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -183,12 +204,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets'))" />
   </Target>
