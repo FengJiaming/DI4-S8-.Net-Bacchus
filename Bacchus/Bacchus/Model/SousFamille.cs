@@ -1,6 +1,13 @@
 ﻿
 namespace Bacchus.Model
 {
+    ///<summary>
+    ///Class: SousFamille
+    ///Type: Model
+    ///Fonction: Attribut/Données: SousFamille
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     public class SousFamille
     {
         public SousFamille(int Ref_SousFamille,  Famille Famille, string Nom)

@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Model
 {
+    ///<summary>
+    ///Class: Article
+    ///Type: Model
+    ///Fonction: Attribut/Données: Article
+    ///Author: FENG Jiaming && GUO Xiaoqing
+    ///Date; 03/06/2019
+    ///</summary>
     public class Article
     {
         public string Ref_Article { get; set; }
